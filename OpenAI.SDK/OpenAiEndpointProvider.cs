@@ -3,7 +3,7 @@
     internal interface IOpenAiEndpointProvider
     {
         string RetrieveModel(string model);
-        string CreateCompletion(string engineId);
+        string CreateCompletion();
         string ListModels();
         string ListFiles();
         string UploadFiles();
@@ -38,9 +38,9 @@
             return $"/{_apiVersion}/files/{fileId}";
         }
 
-        public string CreateCompletion(string engineId)
+        public string CreateCompletion()
         {
-            return $"/{_apiVersion}/engines/{engineId}/completions";
+            return $"/{_apiVersion}/completions";
         }
 
         public string ListModels()

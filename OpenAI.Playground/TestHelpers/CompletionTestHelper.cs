@@ -1,6 +1,7 @@
 ﻿using OpenAI.GPT3.Interfaces;
 using OpenAI.GPT3.ObjectModels;
 using OpenAI.GPT3.ObjectModels.RequestModels;
+using System.Threading.Tasks.Sources;
 
 namespace OpenAI.Playground.TestHelpers
 {
@@ -13,15 +14,23 @@ namespace OpenAI.Playground.TestHelpers
             try
             {
                 ConsoleExtensions.WriteLine("Completion Test:", ConsoleColor.DarkCyan);
+                var prompts = new List<string>() { "Once upon a time", "It was the best of times" };
                 var completionResult = await sdk.Completions.Create(new CompletionCreateRequest()
                 {
-                    Prompt = "Once upon a time",
-                    MaxTokens = 5
-                }, Models.Davinci);
+                    Prompt = prompts,
+                    MaxTokens = 5,
+                    Model = Models.TextDavinciV2
+                });
 
                 if (completionResult.Successful)
                 {
-                    Console.WriteLine(completionResult.Choices.FirstOrDefault());
+                    for (int i = 0; i < prompts.Count; i++)
+                    {
+                        ConsoleExtensions.WriteLine($"Prompt {i + 1}:", ConsoleColor.DarkCyan);
+                        Console.WriteLine(prompts.ElementAtOrDefault(i));
+                        ConsoleExtensions.WriteLine($"Completion {i + 1}:", ConsoleColor.DarkCyan);
+                        Console.WriteLine(completionResult.Choices.ElementAtOrDefault(i));
+                    }
                 }
                 else
                 {
@@ -32,8 +41,6 @@ namespace OpenAI.Playground.TestHelpers
 
                     Console.WriteLine($"{completionResult.Error.Code}: {completionResult.Error.Message}");
                 }
-
-                Console.WriteLine(completionResult.Choices.FirstOrDefault());
             }
             catch (Exception e)
             {
