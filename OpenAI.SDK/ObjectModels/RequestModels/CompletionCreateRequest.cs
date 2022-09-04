@@ -16,7 +16,7 @@ namespace OpenAI.GPT3.ObjectModels.RequestModels
         /// </summary>
         /// <see cref="https://beta.openai.com/docs/api-reference/completions/create#completions/create-prompt" />
         [JsonPropertyName("prompt")]
-        public string? Prompt { get; set; }
+        public List<string>? Prompt { get; set; }
 
         /// <summary>
         ///     The maximum number of tokens to generate in the completion.

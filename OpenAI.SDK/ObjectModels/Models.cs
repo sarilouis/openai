@@ -57,7 +57,7 @@
             CodeDavinciV2
         }
 
-        public enum Subject
+        private enum Subject
         {
             Text,
             InstructBeta,
@@ -117,14 +117,9 @@
         /// <param name="version"></param>
         /// <param name="baseEngine"></param>
         /// <returns></returns>
-        public static string ModelNameBuilder(this BaseEngine baseEngine, Subject? subject = null, string? version = null)
+        private static string ModelNameBuilder(this BaseEngine baseEngine, Subject? subject = null, string? version = null)
         {
-            return ModelNameBuilder(baseEngine.EnumToString(), subject?.EnumToString(baseEngine.EnumToString()), version);
-        }
-
-        public static string ModelNameBuilder(string baseEngine, string? subject, string? version)
-        {
-            var response = subject ?? $"{baseEngine}";
+            var response = subject?.EnumToString(baseEngine) ?? $"{baseEngine.EnumToString()}";
 
             if (!string.IsNullOrEmpty(version))
             {
@@ -132,46 +127,6 @@
             }
 
             return response;
-        }
-
-
-        public static string EnumToString(this Model engine)
-        {
-            return engine switch
-            {
-                Model.Ada => Ada,
-                Model.Babbage => Babbage,
-                Model.Curie => Curie,
-                Model.CurieInstructBeta => CurieInstructBeta,
-                Model.Davinci => Davinci,
-                Model.DavinciInstructBeta => DavinciInstructBeta,
-                Model.TextDavinciV1 => TextDavinciV1,
-                Model.TextDavinciV2 => TextDavinciV2,
-                Model.TextAdaV1 => TextAdaV1,
-                Model.TextBabbageV1 => TextBabbageV1,
-                Model.TextCurieV1 => TextCurieV1,
-                Model.CurieSimilarityFast => CurieSimilarityFast,
-                Model.CodeDavinciV1 => CodeDavinciV1,
-                Model.CodeCushmanV1 => CodeCushmanV1,
-                Model.CodeDavinciV2 => CodeDavinciV2,
-                Model.TextSimilarityAdaV1 => TextSimilarityAdaV1,
-                Model.TextSimilarityBabbageV1 => TextSimilarityBabbageV1,
-                Model.TextSimilarityCurieV1 => TextSimilarityCurieV1,
-                Model.TextSimilarityDavinciV1 => TextSimilarityDavinciV1,
-                Model.TextSearchAdaDocV1 => TextSearchAdaDocV1,
-                Model.TextSearchBabbageDocV1 => TextSearchBabbageDocV1,
-                Model.TextSearchCurieDocV1 => TextSearchCurieDocV1,
-                Model.TextSearchDavinciDocV1 => TextSearchDavinciDocV1,
-                Model.TextSearchAdaQueryV1 => TextSearchAdaQueryV1,
-                Model.TextSearchBabbageQueryV1 => TextSearchBabbageQueryV1,
-                Model.TextSearchCurieQueryV1 => TextSearchCurieQueryV1,
-                Model.TextSearchDavinciQueryV1 => TextSearchDavinciQueryV1,
-                Model.CodeSearchAdaCodeV1 => CodeSearchAdaCodeV1,
-                Model.CodeSearchBabbageCodeV1 => CodeSearchBabbageCodeV1,
-                Model.CodeSearchAdaTextV1 => CodeSearchAdaTextV1,
-                Model.CodeSearchBabbageTextV1 => CodeSearchBabbageTextV1,
-                _ => throw new ArgumentOutOfRangeException(nameof(engine), engine, null)
-            };
         }
 
         private static string EnumToString(this BaseEngine baseEngine)
@@ -187,7 +142,7 @@
             };
         }
 
-        public static string EnumToString(this Subject subject, string baseEngine)
+        private static string EnumToString(this Subject subject, BaseEngine baseEngine)
         {
             return string.Format(subject switch
             {
@@ -202,7 +157,7 @@
                 Subject.CodeSearchText => "code-search-{0}-text",
                 Subject.Code => "code-{0}",
                 _ => throw new ArgumentOutOfRangeException(nameof(subject), subject, null)
-            }, baseEngine);
+            }, baseEngine.EnumToString());
         }
     }
 }
