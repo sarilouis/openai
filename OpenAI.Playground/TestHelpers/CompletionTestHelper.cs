@@ -13,7 +13,7 @@ namespace OpenAI.Playground.TestHelpers
             try
             {
                 ConsoleExtensions.WriteLine("Completion Test:", ConsoleColor.DarkCyan);
-                var prompts = new List<string>() { "Once upon a time", "It was the best of times" };
+                var prompts = new List<string> { "Once upon a time", "It was the best of times" };
                 var completionResult = await sdk.Completions.Create(new CompletionCreateRequest()
                 {
                     Prompt = prompts,
