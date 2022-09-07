@@ -2,59 +2,13 @@
 {
     public static class Models
     {
-        public enum BaseEngine
+        private enum BaseEngine
         {
             Ada,
             Babbage,
             Curie,
             Davinci,
             Cushman
-        }
-
-        public enum Model
-        {
-            Ada,
-            Babbage,
-            Curie,
-            Davinci,
-
-            TextAdaV1,
-            TextBabbageV1,
-            TextCurieV1,
-            TextDavinciV1,
-
-            TextDavinciV2,
-
-            CurieInstructBeta,
-            DavinciInstructBeta,
-
-            CurieSimilarityFast,
-
-            TextSimilarityAdaV1,
-            TextSimilarityBabbageV1,
-            TextSimilarityCurieV1,
-            TextSimilarityDavinciV1,
-
-            TextSearchAdaDocV1,
-            TextSearchBabbageDocV1,
-            TextSearchCurieDocV1,
-            TextSearchDavinciDocV1,
-
-            TextSearchAdaQueryV1,
-            TextSearchBabbageQueryV1,
-            TextSearchCurieQueryV1,
-            TextSearchDavinciQueryV1,
-
-            CodeSearchAdaCodeV1,
-            CodeSearchBabbageCodeV1,
-
-            CodeSearchAdaTextV1,
-            CodeSearchBabbageTextV1,
-
-            CodeDavinciV1,
-            CodeCushmanV1,
-
-            CodeDavinciV2
         }
 
         private enum Subject
